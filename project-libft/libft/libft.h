@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:24:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/26 15:37:43 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/04/27 14:53:02 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stddef.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <ctype.h>
 # include <unistd.h>
 
