@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 17:45:58 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/28 18:08:45 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:39:24 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int	ft_printf(const char *str, ...)
 			ft_putchar_i(str[j], &i);
 		j++;
 	}
+	va_end(args);
 	return (i);
 }
