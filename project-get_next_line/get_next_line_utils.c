@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 18:33:29 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/05/04 19:47:47 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/05/04 19:41:22 by fde-fede          #+#    #+#             */
+/*   Updated: 2022/05/04 19:47:43 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen(char *s)
 {
