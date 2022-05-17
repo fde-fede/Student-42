@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:33:30 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/05/04 19:47:50 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/05/11 19:35:05 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 		if (rd_bytes == -1)
 		{
 			free(buff);
+			free(left_str);
 			return (NULL);
 		}
 		buff[rd_bytes] = '\0';
