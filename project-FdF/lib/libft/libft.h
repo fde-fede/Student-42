@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:24:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/05/22 19:26:48 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/05/25 20:46:10 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <ctype.h>
+# include <stdbool.h>
+# include <fcntl.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
@@ -73,4 +75,7 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+int				ft_printf(const char *str, ...);
+char			*get_next_line(int fd);
+
 #endif
