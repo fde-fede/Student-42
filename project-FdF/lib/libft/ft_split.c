@@ -3,81 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 18:02:43 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 14:32:20 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/20 13:04:29 by jestrada          #+#    #+#             */
+/*   Updated: 2022/05/04 17:45:44 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_limits(const char *s, char c)
+static void	next_word(const char *s, int *first, int *last, char c)
 {
-	int	i;
-	int	cont;
-
-	cont = 0;
-	i = 0;
-	while (*s)
-	{
-		if (*s != c && cont == 0)
-		{
-			cont = 1;
-			i++;
-		}
-		else if (*s == c)
-			cont = 0;
-		s++;
-	}
-	return (i);
+	*first = *last;
+	while (s[*first] == c)
+		*first = *first + 1;
+	*last = *first;
+	while (s[*last] != c && s[*last] != '\0')
+		*last = *last + 1;
 }
 
-static char	*word_dup(const char *str, int start, int end)
+static int	count_words(const char *s, char c)
 {
-	char	*word;
-	int		i;
+	int		first;
+	int		last;
+	size_t	index;
 
-	i = 0;
-	word = malloc((end - start + 1) * sizeof(char));
-	while (start < end)
-		word[i++] = str[start++];
-	word[i] = '\0';
-	return (word);
+	index = 0;
+	first = 0;
+	last = 0;
+	while (s[last] != '\0')
+	{
+		next_word(s, &first, &last, c);
+		if (first == last)
+			break ;
+		else
+			index++;
+	}
+	return (index);
+}
+
+static void	*ft_free(char **ret, size_t total)
+{
+	if (total == 0)
+	{
+		free(ret);
+		return (NULL);
+	}
+	while (total != 0)
+	{
+		free(ret[total]);
+		total--;
+	}
+	free(ret[total]);
+	free(ret);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	int		index;
-	char	**split;
+	int		first;
+	int		last;
+	char	**ret;
+	size_t	index;
 
-	split = malloc ((count_limits(s, c) + 1) * sizeof(char *));
-	if (!s || !split)
-		return (0);
-	i = 0;
-	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	if (!s)
+		return (NULL);
+	ret = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!ret)
+		return (NULL);
+	index = 0;
+	first = 0;
+	last = 0;
+	while (s[last] != '\0')
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
-		{
-			split[j++] = word_dup(s, index, i);
-			index = -1;
-		}
-		i++;
+		next_word(s, &first, &last, c);
+		if (first == last)
+			break ;
+		ret[index] = ft_substr(s, first, last - first);
+		if (!ret[index])
+			return (ft_free(ret, index));
+		index++;
 	}
-	split[j] = 0;
-	return (split);
+	ret[index] = NULL;
+	return (ret);
 }
-/*
-int main(void)
-{
-	char *a = "hola.mundo.a.b.c";
-
-	printf("%s\n", ft_split(a, '.'));
-}
-*/ 

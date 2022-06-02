@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 19:23:42 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 15:53:10 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/01 16:35:00 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/10 19:34:36 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)
+	{
 		return (1);
-	else
-		return (0);
+	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/24 20:19:11 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 13:45:36 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/08 05:09:21 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/08 05:12:35 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

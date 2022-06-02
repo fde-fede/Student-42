@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 21:05:10 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 13:45:26 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/05 21:06:20 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/21 12:56:01 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
+	size_t	index;
 
-	i = 0;
-	while (i < n)
+	index = 0;
+	while (index != n)
 	{
-		((char *)s)[i] = 0;
-		i++;
+		((char *)s)[index] = 0;
+		index++;
 	}
 }

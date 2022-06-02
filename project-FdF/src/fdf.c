@@ -6,19 +6,16 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 19:43:44 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/05/25 20:34:53 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:57:05 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <memory.h>
 
 t_map	*free_map(t_map *map)
 {
-	int	index_x;
 	int	index_y;
 
-	index_x = 0;
 	index_y = 0;
 	while (index_y != map->size_y)
 	{
@@ -44,21 +41,13 @@ char	*free_strmap(char **strmap)
 	return (NULL);
 }
 
-void	hook(void *param)
+void	keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
 
 	data = (t_data *)param;
-	if (mlx_is_key_down(param, MLX_KEY_ESCAPE))
-		mlx_close_window(param);
-	if (mlx_is_key_down(param, MLX_KEY_UP))
-		data->img->instances[0].y -= 5;
-	if (mlx_is_key_down(param, MLX_KEY_DOWN))
-		data->img->instances[0].y += 5;
-	if (mlx_is_key_down(param, MLX_KEY_LEFT))
-		data->img->instances[0].x -= 5;
-	if (mlx_is_key_down(param, MLX_KEY_RIGHT))
-		data->img->instances[0].x += 5;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(data->mlx);
 }
 
 void	ft_draw_map(t_map *map, mlx_image_t *img)
@@ -77,7 +66,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		ft_printf("%s\n", "Usage error");
+		ft_printf("Usage error\n");
 		exit(EXIT_FAILURE);
 	}
 	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
@@ -88,12 +77,13 @@ int	main(int argc, char *argv[])
 	map = read_file(argv[1]);
 	if (!map)
 	{
-		ft_printf("%s\n", "Error al leer el mapa!");
+		ft_printf("Error al leer el mapa!\n");
 		exit(EXIT_FAILURE);
 	}
 	ft_draw_map(map, data.img);
-	mlx_loop_hook(data.mlx, &hook, &data);
+	mlx_key_hook(data.mlx, &keyhook, &data);
 	mlx_loop(data.mlx);
+	mlx_delete_image(data.mlx, data.img);
 	mlx_terminate(data.mlx);
 	free_map(map);
 	return (EXIT_SUCCESS);

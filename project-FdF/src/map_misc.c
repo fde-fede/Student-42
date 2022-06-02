@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 19:39:13 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/05/25 20:35:07 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/05/26 21:47:30 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	scale_map(t_map *map, float user_scale)
 	t_vector	d;
 	t_vector	d2;
 
-	d = subtraction_vectors(create_vector(4885, 1960, 0),
-			create_vector(233, 918, 0));
+	d = subtraction_vectors(create_vector(1832, 735, 0),
+			create_vector(86, 343, 0));
 	d2 = subtraction_vectors(map->map[0][map->size_x - 1], map->map[map->size_y
 			- 1][0]);
 	scale = sqrt(d.x * d.x + d.y * d.y) / sqrt((d2.x * d2.x) + (d2.y * d2.y));

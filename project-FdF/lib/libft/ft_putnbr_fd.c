@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 13:36:54 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 18:19:18 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/08 05:09:21 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/21 16:43:57 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static void	ft_recursive_number(long num, int fd)
+{
+	if (num > 9)
+		ft_recursive_number(num / 10, fd);
+	write(fd, &"0123456789"[num % 10], 1);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned int	tmp;
+	long	num;
 
-	if (n < 0)
+	num = (long)n;
+	if (num < 0)
 	{
-		ft_putchar_fd('-', fd);
-		tmp = (unsigned int)(n * -1);
+		num *= -1;
+		write(fd, "-", 1);
 	}
-	else
-		tmp = (unsigned int)n;
-	if (tmp >= 10)
-		ft_putnbr_fd(tmp / 10, fd);
-	ft_putchar_fd((char)(tmp % 10 + 48), fd);
+	ft_recursive_number(num, fd);
 }

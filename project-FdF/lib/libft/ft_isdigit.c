@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 18:50:56 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 13:45:30 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/01 16:35:00 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/10 19:34:36 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
+	{
 		return (1);
-	else
-		return (0);
+	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 15:26:30 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 15:25:18 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/04 16:48:52 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/20 21:24:07 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,13 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0' && c != *s)
+	while (*s != '\0')
+	{
+		if ((unsigned char)*s == (unsigned char)c)
+			return ((char *)s);
 		s++;
-	if (c == *s)
+	}
+	if (c == 0)
 		return ((char *)s);
-	return (0);
+	return (NULL);
 }
-/*
-int	main(void)
-{
-	char	*b;
-	char	a;
-
-	b = "Hola mundo";
-	a = 'h';
-	printf("%s\n", ft_strchr(b, a));
-	printf("%s\n", strchr(b, a));
-}
-*/

@@ -3,57 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 16:10:55 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 16:56:26 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/08 04:28:46 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/23 20:56:46 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	check_res(int sim, int res)
+static int	ft_isspace(int c)
 {
-	if (res > 0 && sim < 0)
+	if (c == ' ' || c == '\f' || c == '\n' || c == '\r'
+		|| c == '\t' || c == '\v')
+		return (1);
+	else
 		return (0);
-	if (res < 0 && sim > 0)
-		return (-1);
-	return (res);
 }
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
-	int	i;
-	int	sim;
-	int	num;
-	int	res;
+	size_t	index;
+	int		isnegative;
+	int		ret;
 
-	i = 0;
-	sim = 1;
-	num = 0;
-	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	index = 0;
+	ret = 0;
+	isnegative = 1;
+	while (ft_isspace(str[index]))
+		index++;
+	if (str[index] == '+' || str[index] == '-')
 	{
-		if (str[i] == '-')
-			sim = -1;
-		i++;
+		if (str[index] == '-')
+			isnegative = -1;
+		index++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (ft_isdigit(str[index]))
 	{
-		num = (str[i] - '0') + (num * 10);
-		i++;
+		ret = ret * 10 + (str[index] - '0');
+		index++;
 	}
-	res = (num * sim);
-	return (check_res(sim, res));
+	return (ret * isnegative);
 }
-/*
-int	main(void)
-{
-	char	*a;
-
-	a = "  -\r  -9859hola12";
-	printf("%i\n", atoi(a));
-	printf("%i\n", ft_atoi(a));
-}
-*/

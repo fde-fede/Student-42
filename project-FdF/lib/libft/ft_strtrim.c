@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 19:52:51 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/04/25 15:22:10 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/11 19:14:59 by jestrada          #+#    #+#             */
+/*   Updated: 2022/05/04 01:35:38 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,29 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
+	int		index;
+	int		start;
+	int		end;
+	char	*str;
 
-	if (!s1 || !set)
-		return (0);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	i = ft_strlen(s1);
-	while (i && ft_strchr(set, s1[i]))
-		i--;
-	return (ft_substr(s1, 0, i + 1));
+	if (!s1)
+		return (NULL);
+	start = 0;
+	end = ft_strlen(s1);
+	while (s1[start] != '\0' && ft_isset(s1[start], set))
+		start++;
+	while (end > start && ft_isset(s1[end - 1], set))
+		end--;
+	str = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!str)
+		return (NULL);
+	index = 0;
+	while (start != end)
+	{
+		str[index] = s1[start];
+		index++;
+		start++;
+	}
+	str[index] = '\0';
+	return (str);
 }
