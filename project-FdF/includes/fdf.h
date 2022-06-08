@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:43:11 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/05/26 21:52:18 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/03 19:21:10 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_map
 {
 	int			size_x;
 	int			size_y;
+	double		user_scale;
 	t_vector	**map;
 }				t_map;
 

@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 19:43:44 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/06/02 18:57:05 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:46:22 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,36 @@ char	*free_strmap(char **strmap)
 void	keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_data	*data;
+	t_map	*map;
 
+	map = (t_map *)param;
 	data = (t_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(data->mlx);
+	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
+		data->img->instances[0].y += 10;
+	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
+		data->img->instances[0].y -= 10;
+	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		data->img->instances[0].x -= 10;
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		data->img->instances[0].x += 10;
+	if (keydata.key == MLX_KEY_O && keydata.action == MLX_PRESS)
+	{
+		map->user_scale *= 1.2;
+		ft_draw_map(map, data->img);
+	}
+	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
+	{
+		map->user_scale *= 0.8;
+		ft_draw_map(map, data->img);
+	}
 }
 
 void	ft_draw_map(t_map *map, mlx_image_t *img)
 {
 	iso_map(map);
-	scale_map(map, 0.8);
+	scale_map(map, map->user_scale);
 	center_map(map);
 	draw_map_y(map, img);
 	draw_map_x(map, img);
@@ -75,6 +95,7 @@ int	main(int argc, char *argv[])
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(data.mlx, data.img, 0, 0);
 	map = read_file(argv[1]);
+	map->user_scale = 0.8;
 	if (!map)
 	{
 		ft_printf("Error al leer el mapa!\n");
