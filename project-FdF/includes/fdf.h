@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:43:11 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/05/25 20:41:06 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/03 19:21:10 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "../lib/libft/libft.h"
 # include <math.h>
 
-# define WIDTH 5120
-# define HEIGHT 2880
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_vector
 {
@@ -31,6 +31,7 @@ typedef struct s_map
 {
 	int			size_x;
 	int			size_y;
+	double		user_scale;
 	t_vector	**map;
 }				t_map;
 
