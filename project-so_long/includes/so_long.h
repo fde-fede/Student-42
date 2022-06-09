@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:51:06 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/06/08 17:35:34 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:46:13 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 typedef struct s_mlx_2
 {
-	mlx_t		mlx;
-	mlx_image_t	img;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 }		t_mlx_2;
 
 typedef struct s_game
@@ -48,12 +48,19 @@ typedef struct s_game
 	int				y;
 }		t_game;
 
-int		map_init(t_game *game, char *argv);
-void	deal_res(int res, t_game *game, char *line, char *whole_chars);
-void	init_map_b(t_game *game, char *whole_chars);
-void	check_arg(int argc, char *argv[]);
-void	checl_map_elements(char	*whole_chars);
-void	check_walls(char *line);
-void	problems(char *problem, char *whole_chars);
+int				map_init(t_game *game, char *argv);
+void			check_map(t_game *game, char *line, char *whole_chars);
+void			init_map2(t_game *game, char *whole_chars);
+void			check_arg(int argc, char *argv[]);
+void			texture_init(t_game *game);
+void			texture_load(t_game *game, mlx_image_t **img, char *path);
+void			check_map_elements(char	*whole_chars);
+void			check_walls(char *line);
+void			problems(char *problem, char *whole_chars);
+unsigned int	mlx_get_pixel(mlx_image_t *img, int x, int y);
+int				struct_init(t_game *game);
+void			draw_square(t_game *game, mlx_image_t *img, int x, int y);
+void			check_for_elements(t_game *game, int x, int y, int z);
+void			draw_map(t_game *game);
 
 #endif

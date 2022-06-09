@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 16:36:54 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/06/08 17:45:37 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:51:39 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_walls(char *line)
 	}
 }
 
-void	checl_map_elements(char	*whole_chars)
+void	check_map_elements(char	*whole_chars)
 {
 	int	i;
 	int	count_p;
@@ -73,7 +73,7 @@ void	check_arg(int argc, char *argv[])
 		ft_putendl_fd("Error\nInvalid argument", 2);
 		exit (0);
 	}
-	if (ft_strcmp(ft_strrchr(argv[1], '.'), ".ber") != 0)
+	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 99999) != 0)
 	{
 		ft_putendl_fd("Error\nfile must be of type \"<name>.ber\"", 2);
 		exit (0);
