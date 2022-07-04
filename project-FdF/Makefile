@@ -6,7 +6,7 @@
 #    By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/23 13:46:23 by fde-fede          #+#    #+#              #
-#    Updated: 2022/06/08 19:06:07 by fde-fede         ###   ########.fr        #
+#    Updated: 2022/07/04 13:21:00 by fde-fede         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBMLX	= ./lib/MLX42
 LIBFT	= ./lib/libft
 
 HEADERS	= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
-LIBS	= -lglfw $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS	= -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 SRCS	= $(shell find ./ -iname "*.c")
 OBJS	= ${SRCS:.c=.o}
 
