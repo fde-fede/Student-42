@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/21 17:10:30 by fde-fede          #+#    #+#             */
+/*   Updated: 2022/04/25 17:04:10 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-
-typedef struct s_stack
+void	*ft_calloc(size_t count, size_t size)
 {
-	int	nbs[500];
-}	t_stack;
+	void	*p;
+	size_t	tot_size;
 
-#endif
+	tot_size = size * count;
+	p = malloc(tot_size);
+	if (!p)
+		return (0);
+	ft_memset(p, 0, tot_size);
+	return (p);
+}

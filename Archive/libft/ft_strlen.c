@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/02/16 00:24:19 by jestrada          #+#    #+#             */
+/*   Updated: 2022/04/20 20:45:38 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-
-typedef struct s_stack
+size_t	ft_strlen(const char *s)
 {
-	int	nbs[500];
-}	t_stack;
+	size_t	index;
 
-#endif
+	index = 0;
+	while (s[index] != '\0')
+	{
+		index++;
+	}
+	return (index);
+}

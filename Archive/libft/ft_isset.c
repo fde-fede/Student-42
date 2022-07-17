@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_isset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jestrada <jestrada@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/05/04 01:35:20 by jestrada          #+#    #+#             */
+/*   Updated: 2022/05/04 01:35:46 by jestrada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include "../libft/libft.h"
-
-typedef struct s_stack
+int	ft_isset(char const c, char const *set)
 {
-	int	nbs[500];
-}	t_stack;
-
-#endif
+	while (*set != '\0')
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}

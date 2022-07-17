@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/07/16 14:55:20 by fde-fede          #+#    #+#             */
+/*   Updated: 2022/07/16 17:13:48 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "./includes/push_swap.h"
 
-# include "../libft/libft.h"
-
-typedef struct s_stack
+int	check_arguments(int argc, char *argv[])
 {
-	int	nbs[500];
-}	t_stack;
-
-#endif
+	if (argc > 501 && argc < 2)
+	{
+		ft_printf("%s\n", "please, insert from 1 to 500 numbers");
+		return (0);
+	}
+	else
+		return (1);
+}

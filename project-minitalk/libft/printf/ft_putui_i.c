@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_putui_i.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/28 18:18:22 by fde-fede          #+#    #+#             */
+/*   Updated: 2022/04/28 18:19:28 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "ft_printf.h"
 
-# include "../libft/libft.h"
-
-typedef struct s_stack
+void	ft_putui_i(unsigned int nb, int *i)
 {
-	int	nbs[500];
-}	t_stack;
-
-#endif
+	if (nb >= 10)
+	{
+		ft_putui_i(nb / 10, i);
+		nb %= 10;
+	}
+	ft_putchar_i(nb + '0', i);
+}

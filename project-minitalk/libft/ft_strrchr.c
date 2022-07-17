@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/21 15:37:17 by fde-fede          #+#    #+#             */
+/*   Updated: 2022/04/26 18:39:43 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-
-typedef struct s_stack
+char	*ft_strrchr(char *s, int c)
 {
-	int	nbs[500];
-}	t_stack;
+	int			i;
+	const char	*start;
 
-#endif
+	start = s;
+	i = ft_strlen(s);
+	s = (s + i);
+	while (*s != *start && (char)c != *s)
+		s--;
+	if ((char)c == *s)
+		return ((char *)s);
+	return (0);
+}

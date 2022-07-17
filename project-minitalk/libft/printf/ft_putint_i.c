@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_putint_i.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/28 18:14:23 by fde-fede          #+#    #+#             */
+/*   Updated: 2022/04/28 18:16:30 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "ft_printf.h"
 
-# include "../libft/libft.h"
-
-typedef struct s_stack
+void	ft_putint_i(int nb, int *i)
 {
-	int	nbs[500];
-}	t_stack;
+	long long	nbr;
 
-#endif
+	nbr = (long long)nb;
+	if (nbr < 0)
+	{
+		ft_putchar_i('-', i);
+		nbr *= -1;
+	}
+	if (nbr >= 10)
+	{
+		ft_putint_i(nbr / 10, i);
+		nbr %= 10;
+	}
+	ft_putchar_i(nbr + '0', i);
+}

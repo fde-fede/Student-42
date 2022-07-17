@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 13:22:46 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/16 14:48:03 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/04/21 18:28:27 by fde-fede          #+#    #+#             */
+/*   Updated: 2022/04/25 15:29:07 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-
-typedef struct s_stack
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	nbs[500];
-}	t_stack;
+	size_t	i;
+	size_t	j;
+	char	*dest;
 
-#endif
+	dest = (char *)malloc(len + 1);
+	if (!s || !dest)
+		return (0);
+	i = start;
+	j = 0;
+	while (i < ft_strlen(s) && j < len)
+		dest[j++] = s[i++];
+	dest[j] = '\0';
+	return (dest);
+}
