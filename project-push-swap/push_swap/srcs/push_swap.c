@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:15:01 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/31 13:35:40 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:47:31 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	pick_solution(t_program *prg, t_state *states)
 		solution = states;
 	if (solution->instructions)
 	{
-		execute_instructions(solution->instructions, &prg->stack_a,
-			&prg->stack_b, prg->debug);
+		ex_in(solution->instructions, &prg->st_a, &prg->st_b, prg->debug);
 		prg->instr = copy_instructions(solution->instructions);
 		if (!(prg->instr))
 		{
@@ -59,22 +58,22 @@ int	realign_and_fill_a(t_program *prg)
 {
 	t_instruction	*tmp;
 
-	if (prg->stack_b.size > 1 && align_stack_b(prg))
+	if (prg->st_b.size > 1 && align_st_b(prg))
 		return (1);
-	while (prg->stack_b.size)
+	while (prg->st_b.size)
 	{
-		if (prg->stack_b.array[0] > prg->stack_a.array[prg->stack_a.size - 1]
-			|| (prg->stack_b.array[0] < prg->stack_a.array[0]
-				&& prg->stack_a.array[0]
-				< prg->stack_a.array[prg->stack_a.size - 1]))
+		if (prg->st_b.array[0] > prg->st_a.array[prg->st_a.size - 1]
+			|| (prg->st_b.array[0] < prg->st_a.array[0]
+				&& prg->st_a.array[0]
+				< prg->st_a.array[prg->st_a.size - 1]))
 			tmp = add_instruction(&prg->instr, "pa");
 		else
 			tmp = add_instruction(&prg->instr, "rra");
 		if (!tmp)
 			return (1);
-		execute_instructions(tmp, &prg->stack_a, &prg->stack_b, prg->debug);
+		ex_in(tmp, &prg->st_a, &prg->st_b, prg->debug);
 	}
-	if (align_stack_a(prg))
+	if (align_st_a(prg))
 		return (1);
 	return (0);
 }
@@ -83,11 +82,11 @@ int	resolve(t_program *prg)
 {
 	t_state		*states;
 
-	states = new_empty_state(&prg->stack_a,
-			&prg->stack_b, prg->stack_a.max_size);
+	states = new_empty_state(&prg->st_a,
+			&prg->st_b, prg->st_a.max_size);
 	if (!states)
 		return (1);
-	if (prg->stack_a.size > 5 && (create_states_resolution(&states)
+	if (prg->st_a.size > 5 && (create_states_resolution(&states)
 			|| large_resolve(states)))
 		return (1);
 	if (pick_solution(prg, states))
@@ -100,25 +99,25 @@ int	resolve(t_program *prg)
 	return (0);
 }
 
-int	main(int argc, char *argv[])
+int	main(int ac, char *av[])
 {
 	t_program	prg;
 
-	if (--argc < 1 || (!ft_strcmp(argv[1], "-v") && argc == 1))
+	if (--ac < 1 || (!ft_strcmp(av[1], "-v") && ac == 1) || !ft_strlen(av[1]))
 		return (0);
 	prg.debug = 0;
-	if (!ft_strcmp(argv[1], "-v"))
+	if (!ft_strcmp(av[1], "-v"))
 	{
 		prg.debug = 1;
-		if (init_stacks(--argc, &argv[2], &prg.stack_a, &prg.stack_b))
+		if (init_stacks(--ac, &av[2], &prg.st_a, &prg.st_b))
 			return (1);
 	}
-	else if (init_stacks(argc, &argv[1], &prg.stack_a, &prg.stack_b))
+	else if (init_stacks(ac, &av[1], &prg.st_a, &prg.st_b))
 		return (1);
 	if (prg.debug)
-		print_stacks(&prg.stack_a, &prg.stack_b);
+		print_stacks(&prg.st_a, &prg.st_b);
 	prg.instr = NULL;
-	if (is_stack_ordered(&prg.stack_a, ASC) && resolve(&prg))
+	if (is_stack_ordered(&prg.st_a, ASC) && resolve(&prg))
 	{
 		free_instructions(prg.instr);
 		write(STDERR_FILENO, "Error\n", 6);

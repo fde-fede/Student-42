@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 15:32:27 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/31 13:07:54 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:47:31 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strdup_char(const char *str, char stop)
 	return (pt);
 }
 
-int	fill_stack_arg(char *arg, t_stack *stack, size_t *stack_nb)
+int	fill_st_arg(char *arg, t_stack *stack, size_t *stack_nb)
 {
 	int		num;
 	char	*str;
@@ -58,7 +58,7 @@ int	fill_stack_arg(char *arg, t_stack *stack, size_t *stack_nb)
 	return (0);
 }
 
-int	fill_stack(int argc, char *argv[], t_stack *stack)
+int	fill_stack(int ac, char *av[], t_stack *stack)
 {
 	size_t	i;
 	size_t	j;
@@ -66,17 +66,17 @@ int	fill_stack(int argc, char *argv[], t_stack *stack)
 
 	i = 0;
 	j = 0;
-	while (i < (size_t)argc)
+	while (i < (size_t)ac)
 	{
-		ptr = argv[i];
-		if (fill_stack_arg(ptr, stack, &j))
+		ptr = av[i];
+		if (fill_st_arg(ptr, stack, &j))
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-size_t	count_stack_size(int argc, char *argv[])
+size_t	count_stack_size(int ac, char *av[])
 {
 	size_t	i;
 	size_t	j;
@@ -84,12 +84,12 @@ size_t	count_stack_size(int argc, char *argv[])
 
 	size = 0;
 	i = 0;
-	while (i < (size_t)argc)
+	while (i < (size_t)ac)
 	{
 		j = 0;
-		while (argv[i][j])
+		while (av[i][j])
 		{
-			if ((!j || argv[i][j - 1] == ' ') && argv[i][j] != ' ')
+			if ((!j || av[i][j - 1] == ' ') && av[i][j] != ' ')
 				size++;
 			j++;
 		}
@@ -98,29 +98,29 @@ size_t	count_stack_size(int argc, char *argv[])
 	return (size);
 }
 
-int	init_stacks(int argc, char *argv[], t_stack *stack_a, t_stack *stack_b)
+int	init_stacks(int ac, char *av[], t_stack *st_a, t_stack *st_b)
 {
 	size_t	stack_size;
 
-	stack_size = count_stack_size(argc, argv);
-	stack_a->array = malloc(sizeof(int) * stack_size);
-	if (!stack_a->array)
+	stack_size = count_stack_size(ac, av);
+	st_a->array = malloc(sizeof(int) * stack_size);
+	if (!st_a->array)
 		return (write(STDERR_FILENO, "Error\n", 6));
-	stack_b->array = malloc(sizeof(int) * stack_size);
-	if (!stack_b->array)
+	st_b->array = malloc(sizeof(int) * stack_size);
+	if (!st_b->array)
 	{
-		free(stack_a->array);
+		free(st_a->array);
 		write(STDERR_FILENO, "Error\n", 6);
 		return (1);
 	}
-	stack_a->max_size = stack_size;
-	stack_b->max_size = stack_size;
-	stack_a->size = 0;
-	stack_b->size = 0;
-	if (fill_stack(argc, argv, stack_a))
+	st_a->max_size = stack_size;
+	st_b->max_size = stack_size;
+	st_a->size = 0;
+	st_b->size = 0;
+	if (fill_stack(ac, av, st_a))
 	{
-		free(stack_a->array);
-		free(stack_b->array);
+		free(st_a->array);
+		free(st_b->array);
 		write(STDERR_FILENO, "Error\n", 6);
 		return (1);
 	}

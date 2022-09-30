@@ -6,37 +6,37 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:04:35 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/30 13:33:50 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:45:50 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	execute_instructions(t_instruction *instr, t_stack *stack_a,
-	t_stack *stack_b, int debug)
+void	ex_in(t_instruction *instr, t_stack *st_a,
+	t_stack *st_b, int debug)
 {
 	while (instr)
 	{
 		if (debug)
 			print_instruction(instr);
 		if (!ft_strcmp(instr->line, "sa") || !ft_strcmp(instr->line, "ss"))
-			swap_stack(stack_a);
+			swap_stack(st_a);
 		if (!ft_strcmp(instr->line, "sb") || !ft_strcmp(instr->line, "ss"))
-			swap_stack(stack_b);
+			swap_stack(st_b);
 		if (!ft_strcmp(instr->line, "pa"))
-			push_stack(stack_a, stack_b);
+			push_stack(st_a, st_b);
 		if (!ft_strcmp(instr->line, "pb"))
-			push_stack(stack_b, stack_a);
+			push_stack(st_b, st_a);
 		if (!ft_strcmp(instr->line, "ra") || !ft_strcmp(instr->line, "rr"))
-			rotate_stack(stack_a);
+			rotate_stack(st_a);
 		if (!ft_strcmp(instr->line, "rb") || !ft_strcmp(instr->line, "rr"))
-			rotate_stack(stack_b);
+			rotate_stack(st_b);
 		if (!ft_strcmp(instr->line, "rra") || !ft_strcmp(instr->line, "rrr"))
-			reverse_rotate_stack(stack_a);
+			reverse_rotate_stack(st_a);
 		if (!ft_strcmp(instr->line, "rrb") || !ft_strcmp(instr->line, "rrr"))
-			reverse_rotate_stack(stack_b);
+			reverse_rotate_stack(st_b);
 		if (debug)
-			print_stacks(stack_a, stack_b);
+			print_stacks(st_a, st_b);
 		instr = instr->next;
 	}
 }

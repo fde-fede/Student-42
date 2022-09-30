@@ -6,29 +6,29 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 15:00:49 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/31 13:39:38 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:25:41 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int	reverse_rotate_bruteforce_a(t_state **new_states, t_state *tmp,
-	size_t pos[2], t_stack *stack_b)
+	size_t pos[2], t_stack *st_b)
 {
 	size_t			j;
 	t_instruction	*tmp_instr;
 
 	tmp_instr = tmp->last_instr;
 	j = 0;
-	while (j++ < tmp->stack_a->size / 2 && tmp_instr
+	while (j++ < tmp->st_a->size / 2 && tmp_instr
 		&& (!ft_strcmp(tmp_instr->line, "rra")
 			|| !ft_strcmp(tmp_instr->line, "rrr")))
 		tmp_instr = tmp->last_instr->prev;
 	if (!tmp->last_instr || ((ft_strcmp(tmp->last_instr->line, "ra")
 				&& ft_strcmp(tmp->last_instr->line, "rr")
-				&& j < tmp->stack_a->size / 2)))
+				&& j < tmp->st_a->size / 2)))
 	{
-		if (pos[0] > stack_b->size / 2 && !tmp->stack_b->size && pos[1])
+		if (pos[0] > st_b->size / 2 && !tmp->st_b->size && pos[1])
 		{
 			pos[1]--;
 			if (!new_state_instruction(new_states, tmp, "rrr"))
@@ -41,22 +41,22 @@ int	reverse_rotate_bruteforce_a(t_state **new_states, t_state *tmp,
 }
 
 int	rotate_bruteforce_a(t_state **new_states, t_state *tmp,
-	size_t pos[2], t_stack *stack_b)
+	size_t pos[2], t_stack *st_b)
 {
 	size_t			j;
 	t_instruction	*tmp_instr;
 
 	tmp_instr = tmp->last_instr;
 	j = 0;
-	while (j++ < tmp->stack_a->size / 2 && tmp_instr
+	while (j++ < tmp->st_a->size / 2 && tmp_instr
 		&& (!ft_strcmp(tmp_instr->line, "ra")
 			|| !ft_strcmp(tmp_instr->line, "rr")))
 		tmp_instr = tmp->last_instr->prev;
 	if (!tmp->last_instr || ((ft_strcmp(tmp->last_instr->line, "rra")
 				&& ft_strcmp(tmp->last_instr->line, "rrr")
-				&& j < tmp->stack_a->size / 2)))
+				&& j < tmp->st_a->size / 2)))
 	{
-		if (pos[0] <= stack_b->size / 2 && !tmp->stack_b->size && pos[1])
+		if (pos[0] <= st_b->size / 2 && !tmp->st_b->size && pos[1])
 		{
 			pos[1]--;
 			if (!new_state_instruction(new_states, tmp, "rr"))
@@ -69,13 +69,13 @@ int	rotate_bruteforce_a(t_state **new_states, t_state *tmp,
 }
 
 int	bruteforce_choice_a(t_state **new_states, t_state *tmp,
-	size_t pos[2], t_stack *stack_b)
+	size_t pos[2], t_stack *st_b)
 {
-	if (tmp->stack_b->size < 2 && (!tmp->last_instr
+	if (tmp->st_b->size < 2 && (!tmp->last_instr
 			|| ft_strcmp(tmp->last_instr->line, "pa"))
 		&& !new_state_instruction(new_states, tmp, "pb"))
 		return (1);
-	if (tmp->stack_b->size > 0 && (!tmp->last_instr
+	if (tmp->st_b->size > 0 && (!tmp->last_instr
 			|| ft_strcmp(tmp->last_instr->line, "pb"))
 		&& !new_state_instruction(new_states, tmp, "pa"))
 		return (1);
@@ -85,14 +85,14 @@ int	bruteforce_choice_a(t_state **new_states, t_state *tmp,
 	{
 		if (!new_state_instruction(new_states, tmp, "sa"))
 			return (1);
-		if (tmp->stack_b->size > 1 && !new_state_instruction(new_states,
+		if (tmp->st_b->size > 1 && !new_state_instruction(new_states,
 				tmp, "sb"))
 			return (1);
-		if (tmp->stack_b->size > 1 && !new_state_instruction(new_states,
+		if (tmp->st_b->size > 1 && !new_state_instruction(new_states,
 				tmp, "ss"))
 			return (1);
 	}
-	if (rotate_bruteforce_a(new_states, tmp, pos, stack_b))
+	if (rotate_bruteforce_a(new_states, tmp, pos, st_b))
 		return (1);
-	return (reverse_rotate_bruteforce_a(new_states, tmp, pos, stack_b));
+	return (reverse_rotate_bruteforce_a(new_states, tmp, pos, st_b));
 }
