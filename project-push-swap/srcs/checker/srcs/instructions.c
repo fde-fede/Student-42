@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 23:04:35 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/09/21 19:30:33 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/10/09 02:59:08 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_stack *stack_a, t_stack *stack_b, int debug)
 	}
 }
 
-t_instruction	*add_instruction(t_instruction **instructions, char *line)
+int	add_instruction(t_instruction **instructions, char *line)
 {
 	t_instruction	*tmp;
 	t_instruction	*new;
@@ -70,4 +70,45 @@ t_instruction	*add_instruction(t_instruction **instructions, char *line)
 	else
 		*instructions = new;
 	return (0);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*tmp;
+
+	while (n--)
+	{
+		tmp = (char *)s;
+		*tmp = 0;
+		s++;
+	}
+}
+
+int	get_instruction(t_instruction **instructions)
+{
+	int		ret;
+	char	line[4];
+
+	ft_bzero(line, 4);
+	ret = read(STDIN_FILENO, line, 3);
+	if (ret <= 0)
+		return (ret);
+	if (line[2] != '\n')
+	{
+		if (line[0] == '\n' || line[1] == '\n')
+			return (-1);
+		if (read(STDIN_FILENO, line + 3, 1) < 0 || line[3] != '\n')
+			return (-1);
+		line[3] = '\0';
+	}
+	else
+		line[2] = '\0';
+	if ((ft_strcmp(line, "sa") && ft_strcmp(line, "sb")
+			&& ft_strcmp(line, "ss") && ft_strcmp(line, "pa")
+			&& ft_strcmp(line, "pb") && ft_strcmp(line, "ra")
+			&& ft_strcmp(line, "rb") && ft_strcmp(line, "rr")
+			&& ft_strcmp(line, "rra") && ft_strcmp(line, "rrb")
+			&& ft_strcmp(line, "rrr")) || add_instruction(instructions, line))
+		return (-1);
+	return (1);
 }

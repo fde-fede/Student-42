@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 13:50:12 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/08/02 18:19:21 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/10/09 02:59:56 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void				swap_stack(t_stack *stack);
 void				free_instructions(t_instruction *instructions);
 void				execute_instructions(t_instruction *instr, t_stack *stack_a,
 						t_stack *stack_b, int debug);
-t_instruction		*add_instruction(t_instruction **instructions, char *line);
+int					add_instruction(t_instruction **instructions, char *line);
 int					get_instruction(t_instruction **instructions);
 
 /*
@@ -93,6 +93,9 @@ int					ft_atoi(const char *str, int *num);
 void				print_stacks(t_stack *stack_a, t_stack *stack_b);
 void				print_instructions(t_instruction *instructions);
 void				print_debug_instruction(t_instruction *instr,
+						t_stack *stack_a, t_stack *stack_b);
+void				print_bottom_stack(int max_size_nbr[2]);
+void				print_numbers_stacks(int max_size, int max_size_nbr[2],
 						t_stack *stack_a, t_stack *stack_b);
 
 /*

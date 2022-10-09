@@ -6,25 +6,36 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 12:23:32 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/31 19:11:25 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/10/09 03:03:16 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	print_instruction(t_instruction *instr)
-{
-	write(STDOUT_FILENO, instr->line, ft_strlen(instr->line));
-	write(STDOUT_FILENO, "\n", 1);
-}
-
 void	print_instructions(t_instruction *instr)
 {
+	write(STDOUT_FILENO, _YELLOW, ft_strlen(_YELLOW));
+	write(STDOUT_FILENO, "instructions\n", 13);
+	write(STDOUT_FILENO, _END, ft_strlen(_END));
 	while (instr)
 	{
-		print_instruction(instr);
+		write(STDOUT_FILENO, " ", 1);
+		write(STDOUT_FILENO, instr->line, ft_strlen(instr->line));
+		write(STDOUT_FILENO, "\n", 1);
 		instr = instr->next;
 	}
+}
+
+void	print_debug_instruction(t_instruction *instr,
+t_stack *stack_a, t_stack *stack_b)
+{
+	write(STDOUT_FILENO, "---\n", 4);
+	write(STDOUT_FILENO, _YELLOW, ft_strlen(_YELLOW));
+	write(STDOUT_FILENO, "do	", 3);
+	write(STDOUT_FILENO, _END, ft_strlen(_END));
+	write(STDOUT_FILENO, instr->line, ft_strlen(instr->line));
+	write(STDOUT_FILENO, "\n", 1);
+	print_stacks(stack_a, stack_b);
 }
 
 void	print_bottom_stack(int max_size_nbr[2])
@@ -42,7 +53,7 @@ void	print_bottom_stack(int max_size_nbr[2])
 	write(STDOUT_FILENO, "\n", 1);
 }
 
-void	print_numbers_stack(int max_size, int max_size_nbr[2],
+void	print_numbers_stacks(int max_size, int max_size_nbr[2],
 	t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
@@ -83,6 +94,6 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 	write(STDOUT_FILENO, _END, ft_strlen(_END));
 	max_size_nbr[0] = get_max_size_nbr_stack(stack_a);
 	max_size_nbr[1] = get_max_size_nbr_stack(stack_b);
-	print_numbers_stack(max_size, max_size_nbr, stack_a, stack_b);
+	print_numbers_stacks(max_size, max_size_nbr, stack_a, stack_b);
 	print_bottom_stack(max_size_nbr);
 }
