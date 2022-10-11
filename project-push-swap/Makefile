@@ -12,7 +12,6 @@
 
 # COLORS #
 
-# This is a minimal set of ANSI/VT100 color codes
 _END		=	\e[0m
 _BOLD		=	\e[1m
 _UNDER		=	\e[4m
