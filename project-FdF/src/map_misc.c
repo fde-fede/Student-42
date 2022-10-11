@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 19:39:13 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/04 13:29:19 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/05/26 21:47:30 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,5 @@ void	iso_map(t_map *map)
 			index_x++;
 		}
 		index_y++;
-	}
-}
-
-void	usage_program(int argc)
-{
-	if (argc != 2)
-	{
-		ft_printf("Usage error\n");
-		exit(EXIT_FAILURE);
 	}
 }

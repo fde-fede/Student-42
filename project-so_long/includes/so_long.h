@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:51:06 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/06/09 16:46:13 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/20 12:04:50 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,17 @@ void			texture_load(t_game *game, mlx_image_t **img, char *path);
 void			check_map_elements(char	*whole_chars);
 void			check_walls(char *line);
 void			problems(char *problem, char *whole_chars);
-unsigned int	mlx_get_pixel(mlx_image_t *img, int x, int y);
+unsigned int	mlx_get_pixel(mlx_image_t *img, unsigned int x, unsigned int y);
 int				struct_init(t_game *game);
 void			draw_square(t_game *game, mlx_image_t *img, int x, int y);
 void			check_for_elements(t_game *game, int x, int y, int z);
 void			draw_map(t_game *game);
+void			move_bottom(t_game *game);
+void			move_left(t_game *game);
+void			move_right(t_game *game);
+void			move_up(t_game *game);
+int				key_hook(int keycode, t_game *game);
+int				exit_hook(t_game *game);
+size_t			ft_strcat(char *dst, const char *src);
 
 #endif

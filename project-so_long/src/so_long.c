@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:50:43 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/06/09 16:57:38 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:31:55 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_map(t_game *game, char *line, char *whole_chars)
 		tmp = ft_strtrim(line, "\n");
 		if (tmp[0] != '1' || tmp[game->endline] != '1')
 			problems("Error\nWall missing in border", line);
-		ft_strlcat(whole_chars, line, 99999);
+		ft_strcat(whole_chars, line);
 		free(line);
 		line = get_next_line(game->fd);
 		if (ft_strlen(line) != (unsigned long)(game->total_line_char))
@@ -55,12 +55,12 @@ int	map_init(t_game *game, char *map_name)
 	char	*tmp;
 	char	*whole_chars;
 
-	whole_chars = malloc(sizeof(char) * 99999999);
+	whole_chars = malloc(sizeof(char) * 9999999);
 	game->fd = open(map_name, O_RDONLY);
 	if (!game->fd)
 		problems("Error\nFile cannot be read", whole_chars);
 	line = get_next_line(game->fd);
-	ft_strlcat(whole_chars, line, 99999);
+	ft_strcat(whole_chars, line);
 	tmp = ft_strtrim(line, "\n");
 	check_walls(tmp);
 	game->total_line_char = ft_strlen(tmp);
@@ -73,7 +73,7 @@ int	struct_init(t_game *game)
 {
 	game->nb_exit = 0;
 	game->nb_moves = 0;
-	game->mlx.mlx = mlx_init(WIDTH, HEIGHT, "SO_LONG", true);
+	game->mlx.mlx = mlx_init(WIDTH, HEIGHT, "SO_LONG", false);
 	game->mlx.img = mlx_new_image(game->mlx.mlx, WIDTH, HEIGHT);
 	texture_init(game);
 	return (1);

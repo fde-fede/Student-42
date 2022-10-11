@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 18:43:11 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/04 13:32:49 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/03 19:21:10 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_map
 {
 	int			size_x;
 	int			size_y;
+	double		user_scale;
 	t_vector	**map;
 }				t_map;
 
@@ -60,5 +61,4 @@ void		draw_line(mlx_image_t *img, t_vector vec1, t_vector vec2,
 				int color);
 void		fix_draw_vec(t_vector *vec);
 void		scale_map(t_map *map, float user_scale);
-void		usage_program(int argc);
 #endif

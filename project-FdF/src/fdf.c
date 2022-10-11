@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 19:43:44 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/04 13:32:33 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:46:22 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,22 @@ void	keyhook(mlx_key_data_t keydata, void *param)
 		data->img->instances[0].x -= 10;
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 		data->img->instances[0].x += 10;
+	if (keydata.key == MLX_KEY_O && keydata.action == MLX_PRESS)
+	{
+		map->user_scale *= 1.2;
+		ft_draw_map(map, data->img);
+	}
+	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
+	{
+		map->user_scale *= 0.8;
+		ft_draw_map(map, data->img);
+	}
 }
 
 void	ft_draw_map(t_map *map, mlx_image_t *img)
 {
 	iso_map(map);
-	scale_map(map, 0.8);
+	scale_map(map, map->user_scale);
 	center_map(map);
 	draw_map_y(map, img);
 	draw_map_x(map, img);
@@ -74,13 +84,18 @@ int	main(int argc, char *argv[])
 	t_map	*map;
 	t_data	data;
 
-	usage_program(argc);
+	if (argc != 2)
+	{
+		ft_printf("Usage error\n");
+		exit(EXIT_FAILURE);
+	}
 	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	if (!data.mlx)
 		exit(EXIT_FAILURE);
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(data.mlx, data.img, 0, 0);
 	map = read_file(argv[1]);
+	map->user_scale = 0.8;
 	if (!map)
 	{
 		ft_printf("Error al leer el mapa!\n");
