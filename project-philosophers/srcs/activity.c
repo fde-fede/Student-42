@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 18:27:57 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/10/10 19:59:29 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:55:05 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	activity(t_philo *ph)
 	pthread_mutex_lock(&ph->pa->write_mutex);
 	write_status("has taken a fork\n", ph);
 	pthread_mutex_unlock(&ph->pa->write_mutex);
+	if (!ph->r_f)
+	{
+		ft_usleep(ph->pa->die * 2);
+		return ;
+	}
+	pthread_mutex_lock(ph->r_f);
 	pthread_mutex_lock(&ph->pa->write_mutex);
 	write_status("is eating\n", ph);
 	pthread_mutex_lock(&ph->pa->time_eat);
