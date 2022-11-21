@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:38:38 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/10/13 19:48:00 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:19:10 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/wait.h>
+# include <dirent.h>
+# include <sys/ioctl.h>
 
 # define ROAD_END 0
 # define WRITE_END 1
@@ -34,19 +39,21 @@ typedef struct s_mini
 	char	*full_path;
 	int		infile;
 	int		outfile;
-}				t_mini;
+}			t_mini;
 
 enum e_mini_error
 {
-	QUOTE = 1;
-	NDIR = 2;
-	NPERM = 3;
-	NCMD = 6;
-	DUPERR = 7;
-	FORKERR = 8;
-	PIPERR = 9;
-	PIPENDERR = 10;
-	MEM = 11;
-	IS_DIR = 12;
-	NOT_DIR = 13;
+	QUOTE = 1,
+	NDIR = 2,
+	NPERM = 3,
+	NCMD = 6,
+	DUPERR = 7,
+	FORKERR = 8,
+	PIPERR = 9,
+	PIPENDERR = 10,
+	MEM = 11,
+	IS_DIR = 12,
+	NOT_DIR = 13
 };
+
+#endif
