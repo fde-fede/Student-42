@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 18:25:33 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/12/20 11:01:07 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:04:18 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	mini_export(t_prompt *prompt)
 			ij[0]++;
 		}
 	}
+	else
+		ft_putmatrixexport_fd(prompt->envp, 1, 1);
 	return (0);
 }
 

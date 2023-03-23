@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 19:18:24 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/12/20 11:08:45 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:12:53 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,25 @@ char	*expand_vars(char *str, int i, int quotes[2], t_prompt *prompt)
 				quotes, prompt));
 	}
 	return (str);
+}
+
+int	ft_putmatrixexport_fd(char **m, int nl, int fd)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (m && m[i])
+	{
+		if (nl)
+		{
+			count += ft_putstr_fd("declare -x ", fd);
+			count += ft_putendl_fd(m[i], fd);
+		}
+		else
+			count += ft_putstr_fd(m[i], fd);
+		i++;
+	}
+	return (count);
 }

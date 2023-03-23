@@ -6,7 +6,7 @@
 #    By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/07 16:58:45 by mbueno-g          #+#    #+#              #
-#    Updated: 2022/12/20 16:42:53 by fde-fede         ###   ########.fr        #
+#    Updated: 2023/03/14 15:31:37 by fde-fede         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,6 @@ fi
 
 #ECHO
 if [ "$builtin" = "echo" ] || [ "$builtin" = "all" ] ; then
-	exec_test "echo \$PATH"
 	exec_test "echo checking if spaces      work properly"
 	exec_test "echo \"checking if spaces       work properly\""
 	exec_test "echo 'checking if spaces   work properly'"

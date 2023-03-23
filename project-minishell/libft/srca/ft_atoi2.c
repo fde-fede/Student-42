@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/29 20:52:48 by fde-fede          #+#    #+#             */
-/*   Updated: 2023/02/11 12:38:24 by fde-fede         ###   ########.fr       */
+/*   Created: 2022/12/20 20:52:48 by fde-fede          #+#    #+#             */
+/*   Updated: 2023/03/13 12:54:43 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ int	ft_atoi2(const char *nptr, long *nbr)
 	while (ft_isdigit(*nptr))
 	{
 		*nbr = 10 * *nbr + (*nptr - '0');
-		if (*nbr > 2147483647 && sign == 1)
-			return (-1);
-		if (*nbr > 2147483648 && sign == -1)
-			return (-1);
 		nptr++;
 	}
 	if (*nptr && !ft_isspace(*nptr))

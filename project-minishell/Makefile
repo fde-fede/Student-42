@@ -6,7 +6,7 @@
 #    By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/13 19:24:27 by fde-fede          #+#    #+#              #
-#    Updated: 2022/12/20 11:33:30 by fde-fede         ###   ########.fr        #
+#    Updated: 2023/03/14 18:43:25 by fde-fede         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,11 @@ LIBFT = libft/bin/libft.a
 BIN = minishell
 NAME = $(BIN_DIR)/$(BIN)
 
-SRC = main.c builtins.c ft_strtrim_all.c exec.c			\
-	  fill_node.c get_params.c ft_cmdtrim.c				\
-	  expand.c heredoc.c error.c env.c custom_cmd.c		\
-	  get_next_line.c get_next_line_utils.c prompt.c	\
-	  ft_cmdsubsplit.c signal.c parse_args.c get_cmd.c
+SRC = main.c builtins.c ft_str-cmd-trim.c exec.c			\
+	  fill_node.c get_params.c 	custom_cmd_subsplit.c		\
+	  expand.c heredoc-prompt.c error-signal.c env.c 		\
+	  get_next_line.c get_next_line_utils.c					\
+	  parse_args.c get_cmd.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -66,18 +66,15 @@ SRC_PCT = $(shell expr 100 \* $(SRC_COUNT) / $(SRC_COUNT_TOT))
 all: $(NAME)
 
 $(NAME): create_dirs compile_libft $(OBJ)
-	@$(CC) -L /usr/local/opt/readline/lib -I /usr/local/opt/readline/include -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include $(CFLAGS) $(CDEBUG) $(OBJ) $(LIBFT) -lreadline -o $@
+	@$(CC) -L /sgoinfre/goinfre/Perso/fde-fede/homebrew/opt/readline/lib -I /sgoinfre/goinfre/Perso/fde-fede/homebrew/opt/readline/include -I /usr/local/opt/readline/include -L /usr/local/opt/readline/lib $(CFLAGS) $(CDEBUG) $(OBJ) $(LIBFT) -lreadline -o $@
 	@$(PRINTF) "\r%100s\r$(GREEN)$(BIN) is up to date!$(DEFAULT)\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(eval SRC_COUNT = $(shell expr $(SRC_COUNT) + 1))
 	@$(PRINTF) "\r%100s\r[ %d/%d (%d%%) ] Compiling $(BLUE)$<$(DEFAULT)..." "" $(SRC_COUNT) $(SRC_COUNT_TOT) $(SRC_PCT)
-	@$(CC) -I ~/.brew/opt/readline/include -I /usr/local/opt/readline/include $(CFLAGS) $(CDEBUG) -c $< -o $@
+	@$(CC) -I /sgoinfre/goinfre/Perso/fde-fede/homebrew/opt/readline/include -I /usr/local/opt/readline/include $(CFLAGS) $(CDEBUG) -c $< -o $@
 
 compile_libft:
-	@if [ ! -d "libft" ]; then \
-		git clone https://github.com/madebypixel02/libft.git; \
-	fi
 	@make -C libft
 
 create_dirs:
@@ -109,7 +106,7 @@ norminette:
 		make norminette -C libft/; \
 	fi
 	@$(PRINTF) "$(CYAN)\nChecking norm for $(BIN)...$(DEFAULT)\n"
-	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) inc/
+	@norminette -R CheckForbiddenSourceHeader $(SRC_DIR) includes/
 
 re: fclean
 	@make all

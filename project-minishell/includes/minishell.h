@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:38:38 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/12/20 11:35:30 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:08:53 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define MINISHELL_H
 
 # include "../libft/inc/libft.h"
+# include <stdlib.h>
 # include <ctype.h>
 # include <stdio.h>
 # include "colors.h"
@@ -170,5 +171,8 @@ void	handle_sigint(int sig);
 
 /* Function to handle SIGINT signals for child process */
 void	handle_sigint_child(int sig);
+
+/* Prints export with no arguments */
+int		ft_putmatrixexport_fd(char **m, int nl, int fd);
 
 #endif
