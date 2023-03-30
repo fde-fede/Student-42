@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 21:13:38 by fde-fede          #+#    #+#             */
-/*   Updated: 2023/03/28 17:27:01 by fde-fede         ###   ########.fr       */
+/*   Created: 2023/03/23 17:43:11 by fde-fede          #+#    #+#             */
+/*   Updated: 2023/03/23 17:43:37 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Phonebook.class.hpp"
-#include <limits>
-#include <iostream>
+#include "so_long.h"
 
-int main(void)
+int	parse_map(char **map)
 {
-	Phonebook	book;
-	std::string input = "";
-	book.welcome();
-	while (input.compare("EXIT"))
-	{
-		if (input.compare("ADD") == 0)
-			book.addContact();
-		else if (input.compare("SEARCH") == 0) {
-			book.printContacts();
-			book.search();
-		}
-		std::cout << "> " << std::flush;
-		std::cin >> input;
-	}
-	return 0;
+	
 }

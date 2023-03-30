@@ -3,9 +3,6 @@
 #define	WIDTH 1920
 #define HEIGHT 1080
 
-int parse_map(char **map)
-{}
-
 int	check_args(int argc, char **argv)
 {
 	int		i;
@@ -36,7 +33,7 @@ int32_t	main(int argc, char **argv)
 		return 0;
 	}
 	t_game	*game;
-	parse_map()
+	parse_map(argv[1]);
 
  	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "So_Long", true);
 	if (!mlx)

@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:03:42 by fde-fede          #+#    #+#             */
-/*   Updated: 2023/01/16 19:37:25 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:13:33 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ Account::Account(int initial_deposit)
 
 Account::~Account(void)
 {
-	_nbAccounts--;
 	this->_displayTimestamp();
-	std::cout	<< "index:" << _accountIndex << ";"
-				<< "amount:" << _amount << ";"
+	std::cout	<< "index:" << this->_accountIndex << ";"
+				<< "amount:" << this->_amount << ";"
 				<< "closed" << std::endl;
 }
 
@@ -73,6 +72,7 @@ int Account::getNbWithdrawals( void ) {
 }
 
 void	Account::displayAccountsInfos( void ) {
+	_displayTimestamp();
 	std::cout << "accounts:" << getNbAccounts() << ";"
 			<< "total:" << getTotalAmount() << ";"
 			<< "deposits:" << getNbDeposits() << ";"
@@ -92,7 +92,7 @@ void	Account::makeDeposit( int deposit ) {
 			<< "nb_deposit:" << _nbDeposits << std::endl;
 }
 
-void	Account::makeWithdrawal( int withdrawal ) {
+bool	Account::makeWithdrawal( int withdrawal ) {
 	this->_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";"
 			<< "p_amount:" << _amount << ";"
@@ -112,6 +112,10 @@ void	Account::makeWithdrawal( int withdrawal ) {
 }
 
 int Account::checkAmount( void ) const {
+	return (this->_amount);
+}
+
+void	Account::displayStatus() const{
 	this->_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";"
 			<< "amount:" << _amount << ";"
