@@ -5,44 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/09 16:48:49 by fde-fede          #+#    #+#              #
-#    Updated: 2022/06/17 13:25:03 by fde-fede         ###   ########.fr        #
+#    Created: 2023/03/08 18:53:01 by fde-fede          #+#    #+#              #
+#    Updated: 2023/03/30 14:39:50 by fde-fede         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= SO_LONG
-CFLAGS	= -Werror -Wall -Wextra
-LIBMLX	= ./lib/MLX42
-LIBFT	= ./lib/libft
+NAME		:=	Game
+CFLAGS		:=	-Wextra -Wall -Werror -Wunreachable-code -Ofast
+#LIBMLX		:=	/Users/felixjr/development/MLX42
+LIBMLX		:=	/sgoinfre/shared/MLX42/
 
-HEADERS	= -I ./include -I $(LIBMLX)/include -I $(LIBFT)
-LIBS	= -lglfw $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-SRCS	= $(shell find ./ -iname "*.c")
-OBJS	= ${SRCS:.c=.o}
+HEADERS		:=	-I ./includes -I $(LIBMLX)/include
+LIBS		:=	$(LIBMLX)/libmlx42.a -I include -lglfw -L "/sgoinfre/goinfre/Perso/fde-fede/homebrew/opt/glfw/lib" -ldl -pthread
+SRCS		:=	$(shell find ./srcs -iname "*.c")
+OBJS		:=	${SRCS:.c=.o}
 
-all: libft libmlx42 $(NAME)
+all:	$(NAME)
 
-libft:
-	@$(MAKE) -C $(LIBFT)
-
-libmlx42:
-	@$(MAKE) -C $(LIBMLX)
+#libmlx:
+#		@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
-
+		@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+		
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+		@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
-	@rm -f $(OBJS)
-	@$(MAKE) -C $(LIBFT) clean
-	@$(MAKE) -C $(LIBMLX) clean
+		@rm -f $(OBJS)
+
 fclean: clean
-	@rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT) fclean
-	@$(MAKE) -C $(LIBMLX) fclean
+		@rm -f $(NAME)
 
 re: clean all
 
-.PHONY: all, clean, fclean, re, libmlx, libft
+.PHONY: all, clean, fclean, re, libmlx

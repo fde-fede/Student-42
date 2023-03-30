@@ -5,69 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 18:51:06 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/06/20 12:04:50 by fde-fede         ###   ########.fr       */
+/*   Created: 2023/03/11 16:24:15 by fde-fede          #+#    #+#             */
+/*   Updated: 2023/03/30 16:27:55 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "libft.h"
-# include "MLX42/MLX42.h"
+//# include "/Users/felixjr/development/MLX42/include/MLX42/MLX42.h"
+# include "/sgoinfre/shared/MLX42/include/MLX42/MLX42.h"
+# include <errno.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <string.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
 
-typedef struct s_mlx_2
+typedef struct s_data
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-}		t_mlx_2;
+	char	**map;
+	
+	int		fd;
+	int		height;
+	int		width;
+	int		playernb;
+	int		nb_column;
+	int		nb_exit;
+	int		playerwidth;
+	int		playerheight;
+	int		counter;
+	int		collectables;
+}				t_data;
+
+typedef struct s_map
+{
+	void	*floor;
+	void	*barrier;
+	void	*player;
+	void	*exit;
+	void	*collectable;
+	void	*mlxpointer;
+	void	*winpointer;
+}			t_map;
 
 typedef struct s_game
 {
-	t_mlx_2			mlx;
-	int				map_width;
-	int				map_height;
-	int				nb_moves;
-	mlx_image_t		*ground;
-	mlx_image_t		*collectionable;
-	mlx_image_t		*player;
-	mlx_image_t		*wall;
-	mlx_image_t		*exit;
-	char			*map;
-	int				total_line_char;
-	int				line_number;
-	char			*player_position;
-	int				nb_exit;
-	int				number;
-	int				endline;
-	int				fd;
-	int				x;
-	int				y;
-}		t_game;
+	t_data		*data;
+	t_map		*map;
+	t_images	*imgs;
+}				t_game;
 
-int				map_init(t_game *game, char *argv);
-void			check_map(t_game *game, char *line, char *whole_chars);
-void			init_map2(t_game *game, char *whole_chars);
-void			check_arg(int argc, char *argv[]);
-void			texture_init(t_game *game);
-void			texture_load(t_game *game, mlx_image_t **img, char *path);
-void			check_map_elements(char	*whole_chars);
-void			check_walls(char *line);
-void			problems(char *problem, char *whole_chars);
-unsigned int	mlx_get_pixel(mlx_image_t *img, unsigned int x, unsigned int y);
-int				struct_init(t_game *game);
-void			draw_square(t_game *game, mlx_image_t *img, int x, int y);
-void			check_for_elements(t_game *game, int x, int y, int z);
-void			draw_map(t_game *game);
-void			move_bottom(t_game *game);
-void			move_left(t_game *game);
-void			move_right(t_game *game);
-void			move_up(t_game *game);
-int				key_hook(int keycode, t_game *game);
-int				exit_hook(t_game *game);
-size_t			ft_strcat(char *dst, const char *src);
+typedef struct s_images
+{
+	mlx_texture_t		*player;
+	mlx_texture_t		*collectionable;
+	mlx_texture_t		*wall;
+	mlx_texture_t		*exit;
+	mlx_texture_t		*floor;
+}				t_images;
 
 #endif

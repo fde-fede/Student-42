@@ -6,11 +6,11 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 15:32:27 by fde-fede          #+#    #+#             */
-/*   Updated: 2022/07/31 19:12:28 by fde-fede         ###   ########.fr       */
+/*   Updated: 2022/10/13 14:14:41 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "../includes/checker.h"
 
 char	*ft_strdup_char(const char *str, char stop)
 {
