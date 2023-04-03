@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:24:15 by fde-fede          #+#    #+#             */
-/*   Updated: 2023/03/21 19:38:05 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:42:50 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "/Users/felixjr/development/MLX42/include/MLX42/MLX42.h"
+//# include "/sgoinfre/shared/MLX42/include/MLX42/MLX42.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -25,7 +26,7 @@ typedef struct s_data
 {
 	char	**map;
 	
-	int		fd;
+ 	int		fd;
 	int		height;
 	int		width;
 	int		playernb;
@@ -51,8 +52,8 @@ typedef struct s_map
 typedef struct s_game
 {
 	t_data		*data;
-	t_map		*map;
-	t_images	*imgs;
+	//t_map		*map;
+	//t_images	*imgs;
 }				t_game;
 
 typedef struct s_images
@@ -63,4 +64,7 @@ typedef struct s_images
 	mlx_texture_t		*exit;
 	mlx_texture_t		*floor;
 }				t_images;
+
+
+int	parse_map(char *argv, t_game *game);
 #endif
