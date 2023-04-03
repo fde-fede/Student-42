@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:24:15 by fde-fede          #+#    #+#             */
-/*   Updated: 2023/03/31 13:42:50 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:58:55 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ typedef struct s_data
 {
 	char	**map;
 	
- 	int		fd;
 	int		height;
 	int		width;
 	int		playernb;
-	int		nb_column;
 	int		nb_exit;
 	int		playerwidth;
 	int		playerheight;
@@ -66,5 +64,9 @@ typedef struct s_images
 }				t_images;
 
 
-int	parse_map(char *argv, t_game *game);
+int		parse_map(char *argv, t_game *game);
+int		check_map(char *argv, t_game *game);
+void	check_char(t_game *game, char c);
+void	init_data(t_game *game);
+int		save_data(t_game *game);
 #endif
