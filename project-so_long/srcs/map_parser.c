@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 19:17:00 by fde-fede          #+#    #+#             */
-/*   Updated: 2023/04/03 17:46:49 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/04/08 14:34:39 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int parse_map(char *argv, t_game *game)
 {
 	int	i = 0;
-	int j = 0;
 	int	fd;
 
 	game->data->map = (char **)malloc(sizeof(char *) * (game->data->height + 1));
@@ -29,19 +28,6 @@ int parse_map(char *argv, t_game *game)
 	}
 	i = 0;
 	close(fd);
- 	while(game->data->map[i])
-	{
-		j = 0;
-		while (game->data->map[i][j])
-		{
-			write(1, &game->data->map[i][j], 1);
-			if (i == 0 || j == 0)
-				if (game->data->map[i][j] != '1' && game->data->map[i][j] != '\n')
-					return 0;
-			j++;
-		}
-	i++;
-	}
 	save_data(game);
 	return (1);
 }

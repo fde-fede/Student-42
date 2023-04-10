@@ -6,14 +6,12 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 15:55:48 by fde-fede          #+#    #+#             */
-/*   Updated: 2023/04/03 17:49:40 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/04/08 20:18:03 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdlib.h>
-#define WIDTH	1920
-#define HEIGHT	1080
 
 int	check_args(int argc, char **argv)
 {
@@ -39,6 +37,23 @@ int	check_args(int argc, char **argv)
 	return (1);
 }
 
+void		keyhook(mlx_key_data_t keydata, void *param)
+{
+	t_game	*game;
+	
+	game = (t_game *)param;
+	if ((keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS) || (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS))
+		move_up(game);
+	if ((keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS) || (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS))
+		move_right(game);
+	if ((keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS) || (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS))
+		move_left(game);
+	if ((keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS) || (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS))
+		move_down(game);
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(game->mlx);
+}
+
 int32_t	main(int argc, char **argv)
 {	
 	if (!check_args(argc, argv))
@@ -52,34 +67,12 @@ int32_t	main(int argc, char **argv)
 	if (!check_map(argv[1], game))
 		return 0;
 	parse_map(argv[1], game);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "So_Long", true);
-	if (!mlx)
-		return 0;
-	mlx_image_t* img = mlx_new_image(mlx, 40, 40);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		return 0;
+	set_images(game);
+	game->mlx = mlx_init(game->data->width * 40, game->data->height * 40, "So_Long", true);
+	game->data->enemy_index = 0;
+	print_map(game, game->mlx);
+	mlx_key_hook(game->mlx, &keyhook, game);
+	mlx_loop_hook(game->mlx, &look_for_move, game);
+	mlx_loop(game->mlx);
 	return (EXIT_SUCCESS);
 }
-	// TO DO:luego guardar datos y contar el numero de objetos.
- 
- 
- 
- 
- 
- 
-
-
-	/* mlx_image_t* img = mlx_new_image(mlx, 40, 40);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		return 0;
-
-	mlx_texture_t *cat;
-	cat = mlx_load_png("/Users/fde-fede/Student-42/project-so_long/images/cat.png");
-	if (!cat)
-		printf("%s", "fallo");
-
-	img = mlx_texture_to_image(mlx, cat);
-	mlx_image_to_window(mlx, img, 700, 766/2);
-
-	mlx_loop(mlx);
-	mlx_terminate(mlx); */
