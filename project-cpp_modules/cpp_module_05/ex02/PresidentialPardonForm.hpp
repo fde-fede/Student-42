@@ -6,30 +6,32 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:00:39 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 10:03:34 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:03:32 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-#define PRESIDENTIALPARDONFORM_HPP
+#pragma once
 
 #include "Form.hpp"
 
-class PresidentialPardonForm : public Form
+class Bureaucrat;
+
+class PresidentialPardonForm: public Form
 {
 	private:
-		std::string _target;
-
-		PresidentialPardonForm();
-	
+		std::string	_target;
 	public:
-		PresidentialPardonForm( const std::string& target );
-		PresidentialPardonForm( const PresidentialPardonForm& src );
-		~PresidentialPardonForm();
+		/* Constructors & Destructors */
+		PresidentialPardonForm(void);
+		PresidentialPardonForm(std::string const &target);
+		PresidentialPardonForm(PresidentialPardonForm const &copy);
+		~PresidentialPardonForm(void);
 
-		PresidentialPardonForm& operator=( const PresidentialPardonForm& rhs );
+		/* Basic Operators */
+		PresidentialPardonForm const	&operator=(PresidentialPardonForm const &copy);
 
-		void execute( const Bureaucrat& executor ) const;
+		/* Main Member Functions */
+		void	beExecuted(Bureaucrat const &bureaucrat) const;
 };
 
-#endif
+std::ostream	&operator<<(std::ostream &str, PresidentialPardonForm const &form);

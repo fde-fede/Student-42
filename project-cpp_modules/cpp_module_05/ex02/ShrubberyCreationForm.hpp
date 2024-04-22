@@ -6,31 +6,35 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:21:07 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 10:22:15 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:04:21 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-#define SHRUBBERYCREATIONFORM_HPP
+#pragma once
 
-#include "Form.hpp"
 #include <fstream>
+#include "Form.hpp"
 
-class ShrubberyCreationForm : public Form
+#define TREE "          &&& &&  & &&\n      && &\\/&\\|& ()|/ @, &&\n      &\\/(/&/&||/& /_/)_&/_&\n   &() &\\/&|()|/&\\/ '%\" & ()\n  &_\\_&&_\\ |& |&&/&__%_/_& &&\n&&   && & &| &| /& & % ()& /&&\n ()&_---()&\\&\\|&&-&&--%---()~\n     &&     \\|||\n             |||\n             |||\n             |||\n       , -=-~  .-^- _\n"
+
+class Bureaucrat;
+
+class ShrubberyCreationForm: public Form
 {
-private:
-    const std::string _target;
+	private:
+		std::string	_target;
+	public:
+		/* Constructors & Destructors */
+		ShrubberyCreationForm(void);
+		ShrubberyCreationForm(std::string const &target);
+		ShrubberyCreationForm(ShrubberyCreationForm const &copy);
+		~ShrubberyCreationForm(void);
 
-    ShrubberyCreationForm();
+		/* Basic Operators */
+		ShrubberyCreationForm const	&operator=(ShrubberyCreationForm const &copy);
 
-public:
-    ShrubberyCreationForm( const std::string& target );
-    ShrubberyCreationForm( const ShrubberyCreationForm& src );
-    ~ShrubberyCreationForm();
-
-    ShrubberyCreationForm& operator=( ShrubberyCreationForm& rhs );
-    
-    void execute( const Bureaucrat& executor ) const;
+		/* Main Member Functions */
+		void	beExecuted(Bureaucrat const &bureaucrat) const;
 };
 
-#endif
+std::ostream	&operator<<(std::ostream &str, ShrubberyCreationForm const &form);

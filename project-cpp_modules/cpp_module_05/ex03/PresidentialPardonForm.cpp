@@ -6,27 +6,48 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:03:55 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 10:14:16 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:12:54 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : Form( "PresidentialPardonForm", 25, 5 ), _target( target ) {}
+PresidentialPardonForm::PresidentialPardonForm(void): Form::Form("PresidentialPardonForm", 25, 5), _target("null") {}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src) : Form( src ), _target( src._target ) {}
+PresidentialPardonForm::PresidentialPardonForm(std::string const &target): Form::Form("PresidentialPardonForm", 25, 5), _target(target) {}
 
-PresidentialPardonForm::~PresidentialPardonForm() {}
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &copy): Form::Form(copy), _target(copy._target) {}
 
-PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& rhs) {
-	(void)rhs;
-	return *this;
+PresidentialPardonForm::~PresidentialPardonForm(void) {}
+
+PresidentialPardonForm const	&PresidentialPardonForm::operator=(const PresidentialPardonForm &copy)
+{
+	Form::operator=(copy);
+	this->_target = copy._target;
+	return (*this);
 }
 
-void	PresidentialPardonForm::execute(const Bureaucrat& executor) const {
-	if ( executor.getGrade() > this->getGradeToExecute() )
-		throw Form::GradeTooLowException();
-	else {
-		std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
-	}
+void	PresidentialPardonForm::beExecuted(const Bureaucrat &bureaucrat) const
+{
+	(void)bureaucrat;
+	std::cout << this->_target << " has been pardoned by Zafod Beeblebrox" << std::endl;
+}
+
+Form	*PresidentialPardonForm::makeForm(Form *form, std::string const &type, std::string const &target)
+{
+	if (form == NULL && type == "presidential pardon")
+		return (new PresidentialPardonForm(target));
+	return (form);
+}
+
+std::string const	&PresidentialPardonForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
+std::ostream	&operator<<(std::ostream &str, PresidentialPardonForm const &form)
+{
+	return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());
 }

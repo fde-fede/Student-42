@@ -6,52 +6,53 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:29:36 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 09:49:43 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:03:27 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#pragma once
 
-#include "Bureaucrat.hpp"
+#include <iostream>
 
 class Bureaucrat;
 
 class Form
 {
 	private:
-		const std::string	_name;
-		bool				_signed;
-		const int			_gradeToSign;
-		const int			_gradeToExecute;
-
-		Form();
-	
+		std::string const	_name;
+		bool				_isSigned;
+		int const			_signGrade;
+		int const			_execGrade;
 	public:
-		Form( const std::string& name, int gradeToSign );
-		Form( const std::string& name, int gradeToSign, int gradeToExecute );
-		Form( const Form& src );
-		~Form();
+		/* Constructors & Destructors */
+		Form(void);
+		Form(std::string const &name, int const &signGrade, int const &execGrade);
+		Form(Form const &copy);
+		~Form(void);
 
-		Form&	operator=( const Form& rhs );
+		/* Basic Operators */
+		Form const	&operator=(Form const &copy);
 
-		std::string getName() const;
-		bool		getSigned() const;
-		int			getGradeToSign() const;
-		int			getGradeToExecute() const;
+		/* Getters & Setters */
+		std::string const	&getName(void) const;
+		bool const			&getIsSigned(void) const;
+		int const			&getSignGrade(void) const;
+		int const			&getExecGrade(void) const;
 
-		void		beSigned( const Bureaucrat& bureaucrat );
-		
-		class GradeTooHighException : public std::exception {
+		/* Main Member Functions */
+		void	beSigned(Bureaucrat &bureaucrat);
+
+		/* Exceptions */
+		class GradeTooHighException: public std::exception
+		{
 			public:
-				virtual const char* what() const throw() { return "Grade too high"; }
+				virtual char const	*what(void) const throw();
 		};
-		class GradeTooLowException : public std::exception {
+		class GradeTooLowException: public std::exception
+		{
 			public:
-				virtual const char* what() const throw() { return "Grade too low"; }
+				virtual char const	*what(void) const throw();
 		};
 };
 
-std::ostream&	operator<<( std::ostream& o, const Form& rhs );
-
-#endif
+std::ostream	&operator<<(std::ostream &str, Form const &form);

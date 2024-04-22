@@ -6,54 +6,57 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:21:09 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 10:24:04 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:13:25 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm( const std::string& target ) : Form( "ShrubberyCreationForm", 145, 137 ), _target( target ) {}
+ShrubberyCreationForm::ShrubberyCreationForm(void): Form::Form("ShrubberyCreationForm", 145, 137), _target("null") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm& src ) : Form( src ), _target( src._target ) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target): Form::Form("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {}
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &copy): Form::Form(copy), _target(copy._target) {}
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=( ShrubberyCreationForm& rhs ) {
-    (void)rhs;
-    return *this;
+ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
+
+ShrubberyCreationForm const	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &copy)
+{
+	Form::operator=(copy);
+	this->_target = copy._target;
+	return (*this);
 }
 
-void    ShrubberyCreationForm::execute( const Bureaucrat& executor ) const {
-    if ( this->getSigned() == false )
-        throw Form::NotSignedException();
-    else if ( executor.getGrade() > this->getGradeToExecute() ) {
-        throw Form::GradeTooLowException();
-    }
+void	ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) const
+{
+	std::ofstream	outfile;
+	
+	outfile.open((this->_target + "_shrubbery").c_str());
+	if (outfile.fail())
+	{
+		std::cout << "Could not open output file" << std::endl;
+		return ;
+	}
+	outfile << TREE;
+	outfile.close();
+	std::cout << bureaucrat.getName() << " successfully created a shrubbery" << std::endl;
+}
 
-    std::ofstream file( this->getName() + "_shrubbery" );
-    file << "                      ___" << std::endl;
-    file << "                _,-'\"\"   \"\"\"\"`--." << std::endl;
-    file << "             ,-'          __,,-- \\" << std::endl;
-    file << "           ,\'    __,--\"\"\"\"dF      )" << std::endl;
-    file << "          /   .-\"Hb_,--\"\"dF      /" << std::endl;
-    file << "        ,\'       _Hb ___dF\"-._,-'" << std::endl;
-    file << "      ,'      _,-\"\"\"\"   \"\"--..__" << std::endl;
-    file << "     (     ,-'                  `." << std::endl;
-    file << "      `._,'     _   _             ;" << std::endl;
-    file << "       ,'     ,' `-'Hb-.___..._,-'" << std::endl;
-    file << "       \\    ,'\"Hb.-\'HH`-.dHF\"" << std::endl;
-    file << "        `--\'   \"Hb  HH  dF\"" << std::endl;
-    file << "                \"Hb HH dF" << std::endl;
-    file << "                 \"HbHHdF" << std::endl;
-    file << "                  |HHHF" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  dHHHb" << std::endl;
-    file << "                .dFd|bHb.               o" << std::endl;
-    file << "      o       .dHFdH|HbTHb.          o /" << std::endl;
-    file << "\\  Y  |  \\__,dHHFdHH|HHhoHHb.__Krogg  Y" << std::endl;
-    file << "##########################################" << std::endl;
-    file.close();
+Form	*ShrubberyCreationForm::makeForm(Form *form, std::string const &type, std::string const &target)
+{
+	if (form == NULL && type == "shrubbery creation")
+		return (new ShrubberyCreationForm(target));
+	return (form);
+}
+
+std::string const	&ShrubberyCreationForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
+std::ostream	&operator<<(std::ostream &str, ShrubberyCreationForm const &form)
+{
+	return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());
 }

@@ -6,30 +6,37 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:03:41 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 12:51:42 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:13:17 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-#define ROBOTOMYREQUESTFORM_HPP
+#pragma once
 
+#include <cstdlib>
 #include "Form.hpp"
 
-class RobotomyRequestForm : public Form
+class Bureaucrat;
+
+class RobotomyRequestForm: public Form
 {
-private:
-    const std::string _target;
+	private:
+		std::string	_target;
+	public:
+		/* Constructors & Destructors */
+		RobotomyRequestForm(void);
+		RobotomyRequestForm(std::string const &target);
+		RobotomyRequestForm(RobotomyRequestForm const &copy);
+		~RobotomyRequestForm(void);
 
-    RobotomyRequestForm();
+		/* Basic Operators */
+		RobotomyRequestForm const	&operator=(RobotomyRequestForm const &copy);
 
-public:
-    RobotomyRequestForm( const std::string& target );
-    RobotomyRequestForm( const RobotomyRequestForm& src );
-    ~RobotomyRequestForm();
+		/* Main Member Functions */
+		void		beExecuted(Bureaucrat const &bureaucrat) const;
+		static Form	*makeForm(Form *form, std::string const &type, std::string const &target);
 
-    RobotomyRequestForm &operator=( RobotomyRequestForm& rhs );
-    
-    void execute( const Bureaucrat& executor ) const;
+		/* Getters & Setters */
+		std::string const	&getTarget(void) const;
 };
 
-#endif
+std::ostream	&operator<<(std::ostream &str, RobotomyRequestForm const &form);

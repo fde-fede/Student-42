@@ -6,48 +6,47 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:20:23 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 13:03:51 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:07:22 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
+#include "Bureaucrat.hpp"
 
-int main( void )
+int main(void)
 {
-    {
-        Intern  someRandomIntern;
-        Form*   rrf;
+	Intern		bob;
+	Form		*form;
+	Bureaucrat	karen("Karen", 50);
 
-        // rrf = someRandomIntern.makeForm("robotomy", "Bender");
-        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-        delete rrf;
-    }
+	// Test how all forms are created properly execpt for the last one
+	try
+	{
+		form = bob.makeForm("robotomy request", "Robert");
+		delete form;
+		form = bob.makeForm("shrubbery creation", "Shrubby");
+		delete form;
+		form = bob.makeForm("presidential pardon", "Philipe");
+		delete form;
+		form = bob.makeForm("random request", "Randy");
+		delete form;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Caught exception: " << e.what() << std::endl;
+	}
 
-    try {
-        Bureaucrat bureaucrat("ash", 2); // error with 200
-        ShrubberyCreationForm form1("Shrubbery");
-        RobotomyRequestForm form2("Robotomy");
-        PresidentialPardonForm form3("President");
-
-        std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
-        bureaucrat.signForm(form1);
-        bureaucrat.executeForm(form1);
-        std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
-        bureaucrat.signForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
-        bureaucrat.signForm(form3);
-        bureaucrat.executeForm(form3);
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
-    return EXIT_SUCCESS;
+	// Test some Actions with available form
+	std::cout << "------------------------------------" << std::endl;
+	form = bob.makeForm("shrubbery creation", "Fred");
+	form->beSigned(karen);
+	karen.executeForm(*form);
+	delete form;
+	std::cout << "------------------------------------" << std::endl;
+	form = bob.makeForm("presidential pardon", "Georgia");
+	karen.signForm(*form);
+	karen.executeForm(*form);
+	delete form;
+	return (0);
 }

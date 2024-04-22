@@ -6,39 +6,92 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:20:23 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/01/15 10:27:10 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:06:05 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-int main( void )
+int main(void)
 {
+	/* Create the 3 forms and some Bureaucrats */
 
-    try {
-        Bureaucrat bureaucrat("ash", 2); // error with 200
-        ShrubberyCreationForm form1("Shrubbery");
-        RobotomyRequestForm form2("Robotomy");
-        PresidentialPardonForm form3("President");
+	ShrubberyCreationForm shrubbery("Home");
+	RobotomyRequestForm robotomy("Morty");
+	PresidentialPardonForm pardon("Dog Sanchez");
+	Bureaucrat mike("Mike", 150);
+	Bureaucrat jon("Jon", 120);
+	Bureaucrat steve("Steve", 3);
+	
+	/* Try to execute forms without being signed */
+	{
+		try
+		{
+			std::cout << mike << std::endl;
+			std::cout << shrubbery << std::endl;
+			std::cout << robotomy << std::endl;
+			std::cout << pardon << std::endl;
+			mike.executeForm(shrubbery);
+			mike.executeForm(robotomy);
+			mike.executeForm(pardon);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
 
-        std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
-        bureaucrat.signForm(form1);
-        bureaucrat.executeForm(form1);
-        std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
-        bureaucrat.signForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
-        bureaucrat.signForm(form3);
-        bureaucrat.executeForm(form3);
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
-    return EXIT_SUCCESS;
+	std::cout << "\n --------------------- \n\n";
+	
+	/* Sign form and try to execute without enough grade */
+	{
+		try
+		{
+			std::cout << mike << std::endl;
+			std::cout << jon << std::endl;
+			std::cout << shrubbery << std::endl;
+			std::cout << robotomy << std::endl;
+			std::cout << pardon << std::endl;
+			shrubbery.beSigned(jon);
+			mike.executeForm(shrubbery);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+
+	std::cout << "\n --------------------- \n\n";
+	
+	/* Sign forms and execute them */
+	{
+		try
+		{
+			robotomy.beSigned(steve);
+			pardon.beSigned(steve);
+			std::cout << shrubbery << std::endl;
+			std::cout << robotomy << std::endl;
+			std::cout << pardon << std::endl;
+			
+			std::cout << "\n --------------------- \n\n";
+			steve.executeForm(shrubbery);
+			std::cout << "\n --------------------- \n\n";
+			steve.executeForm(robotomy);
+			std::cout << "\n --------------------- \n\n";
+			steve.executeForm(pardon);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	
+	std::cout << "\n --------------------- \n\n";
+
+
+	return (0);
 }
