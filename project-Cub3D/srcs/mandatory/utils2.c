@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joslopez <joslopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:26:33 by joslopez          #+#    #+#             */
-/*   Updated: 2023/07/28 13:03:31 by joslopez         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:56:43 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_lstadd_back_map(t_map **alst, t_map *new)
 	t_map	*tmp;
 
 	tmp = *alst;
-	if (*alst == NULL)
+	if (tmp == NULL)
 		*alst = new;
 	else
 		(ft_lstlast_map(*alst))->next = new;

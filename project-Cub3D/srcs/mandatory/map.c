@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:22:46 by joslopez          #+#    #+#             */
-/*   Updated: 2023/12/14 20:33:56 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/12/20 09:54:49 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_middle_lines(t_map *map)
 {
 	t_map	*tmp;
-	size_t	len;
+	t_map	*aux;
 
 	tmp = map;
 	aux = map;
@@ -24,27 +24,13 @@ int	check_middle_lines(t_map *map)
 		ft_putstr("Error\nInvalid map.");
 		return (1);
 	}
-	while (tmp)
-	{
-		len = ft_strlen(tmp->line);
-		aux = aux->next;
-		//printf("%s\n", tmp->line);
-		//printf("%s\n", aux->line);
-		if ((tmp->line[0] != '1' && tmp->line[0] != ' ') || tmp->line[len \
-			- 1] != '1' || (aux && aux->line[len - 1] == '0'))
-		{
-			ft_putstr("Error\nMap not closed");
-			return (1);
-		}
-		tmp = tmp->next;
-	}
 	return (0);
 }
 
-int	check_last_line(t_map *map, int i)
+int	check_last_line(t_map *map, int i, t_map *prev)
 {
 	t_map	*tmp;
-	t_map	*prev;
+	int		ret;
 
 	tmp = map;
 	if (!tmp)
@@ -57,17 +43,8 @@ int	check_last_line(t_map *map, int i)
 		prev = tmp;
 		tmp = tmp->next;
 	}
-	while (tmp->line[i])
-	{
-		if (tmp->line[i] != '1' && tmp->line[i] != ' ' || (prev->line[i] == '0' \
-				&& tmp->line[i] != '1'))
-		{
-			ft_putstr("Error\nLast Map Line not closed.");
-			return (1);
-		}
-		i++;
-	}
-	return (0);
+	ret = check_characters(tmp, i, prev);
+	return (ret);
 }
 
 int	closed_map(t_map *map)
@@ -93,7 +70,7 @@ int	closed_map(t_map *map)
 	}
 	if (check_middle_lines(map) != 0)
 		return (1);
-	if (check_last_line(map, 0) != 0)
+	if (check_last_line(map, 0, 0) != 0)
 		return (1);
 	return (0);
 }
@@ -129,7 +106,7 @@ int	validate_and_count_positions(t_map *map, int *count_pos)
 int	check_map(t_map *map)
 {
 	int	count_pos;
-	
+
 	count_pos = 0;
 	if (closed_map(map) != 0)
 		return (1);

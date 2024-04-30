@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joslopez <joslopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:06:16 by joslopez          #+#    #+#             */
-/*   Updated: 2023/08/30 20:06:27 by joslopez         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:21:46 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ t_env	start_environment(t_arg variables)
 	start_orientation(&env);
 	if (start_textures(&env) != 0)
 		exit(0);
-	//env.map_height = ft_lstsize_map(env.arg.map);
 	env.ray.zbuffer = malloc(sizeof(double) * (env.width + 1));
 	if (!env.ray.zbuffer)
 	{

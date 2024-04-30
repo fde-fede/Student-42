@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 12:04:04 by joslopez          #+#    #+#             */
-/*   Updated: 2023/12/19 19:45:08 by fde-fede         ###   ########.fr       */
+/*   Created: 2024/04/30 08:47:56 by fde-fede          #+#    #+#             */
+/*   Updated: 2024/04/30 08:49:39 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#pragma once
 
-size_t	ft_strlen(const char *c)
-{
-	int	i;
+#include <algorithm>
+#include <iterator>
 
-	if (!c)
-		return (0);
-	i = 0;
-	while (c[i] != '\0')
-		i++;
-	return (i);
+class outrange : public std::exception{
+public:
+	const char *what() const throw()
+	{
+		return "Out of range";
+	}
+};
+
+template <typename T>
+typename T::iterator	easyfind(T &p1, int p2){
+	typename T::iterator ret = std::find(p1.begin(), p1.end(), p2);
+	if (ret == p1.end())
+		throw outrange();
+	return ret;
 }

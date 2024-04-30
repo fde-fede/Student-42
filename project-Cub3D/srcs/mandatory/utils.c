@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joslopez <joslopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:05:58 by joslopez          #+#    #+#             */
-/*   Updated: 2023/08/30 19:18:55 by joslopez         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:54:07 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*map_without_spaces(char *str, char c, int i, int j)
 	int		len;
 	char	*new_str;
 
+	(void)c;
 	len = ft_strlen(str);
 	new_str = malloc(sizeof(char) * (len + 1));
 	if (!(new_str))

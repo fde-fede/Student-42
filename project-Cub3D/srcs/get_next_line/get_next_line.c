@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 18:54:09 by joslopez          #+#    #+#             */
-/*   Updated: 2023/12/14 19:38:43 by fde-fede         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:59:00 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int	get_next_line(const int fd, char **line)
 		return (str_free(temp, -1));
 	if (memor != NULL)
 		temp = ft_join_free_gnl(temp, memor);
-	else
-		temp = temp;
 	memor = NULL;
 	if ((ret == 0 && !ft_strchr_gnl(temp, '\n') && !ft_strchr_gnl(memor, '\n')))
 	{

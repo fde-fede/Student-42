@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joslopez <joslopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:26:08 by joslopez          #+#    #+#             */
-/*   Updated: 2023/11/07 20:02:58 by joslopez         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:41:30 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_arg
 	t_map			*map;
 	int				fcounter;
 	int				ccounter;
-	int				lineCounter;
+	int				linecounter;
 }					t_arg;
 
 typedef struct s_tex
@@ -200,6 +200,11 @@ void				direction_ray(t_env *env);
 char				hit_ray(t_env *env, char wall_tex);
 void				size_ray(t_env *env);
 char				*display_column(t_env *env, int x, char tex, int y);
+size_t				check_last_wall(char *tmp, size_t len);
+int					check_characters(t_map *tmp, int i, t_map *prev);
+int					check_last_wall_map(t_map *tmp, t_map *aux);
+int					extra_map_check(t_map *map);
+int					create_tmp_map(t_map *map, int len, int rows);
 
 # define KEY_UP 13
 # define KEY_RIGHT 2

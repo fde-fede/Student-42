@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 12:04:04 by joslopez          #+#    #+#             */
-/*   Updated: 2023/12/19 19:45:08 by fde-fede         ###   ########.fr       */
+/*   Created: 2024/04/30 08:47:47 by fde-fede          #+#    #+#             */
+/*   Updated: 2024/04/30 08:52:43 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "easyfind.hpp"
+#include <vector>
+#include <iostream>
 
-size_t	ft_strlen(const char *c)
+int	main()
 {
-	int	i;
+	std::vector<int>	vec;
+	std::vector<int>::iterator	it;
 
-	if (!c)
-		return (0);
-	i = 0;
-	while (c[i] != '\0')
-		i++;
-	return (i);
+	for (size_t i = 0; i < 10; i++)
+		vec.push_back(i * 2);
+	it = easyfind(vec, 4);
+	std::cout << "iterator for 4: " << *it << std::endl;
+
+	try { it = easyfind(vec, 3); }
+	catch (const std::exception &e) { std::cerr << e.what() << '\n'; }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joslopez <joslopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 17:13:11 by joslopez          #+#    #+#             */
-/*   Updated: 2023/07/24 15:06:48 by joslopez         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:58:00 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	left_right(t_env *env)
 
 void	movement(t_env *env)
 {
-	int	pos;
-
 	if (env->move.up == 1 || env->move.down == 1)
 		up_down(env);
 	if (env->move.move_left == 1 || env->move.move_right == 1)

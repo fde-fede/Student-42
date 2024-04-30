@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joslopez <joslopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 14:34:45 by joslopez          #+#    #+#             */
-/*   Updated: 2023/07/24 22:00:20 by joslopez         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:58:21 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,9 @@ int	get_texture_width(t_env *env, char tex)
 void	wall_texture(t_env *env, char tex)
 {
 	double	wallx;
-	int		height;
 	int		width;
 
 	width = get_texture_width(env, tex);
-	height = get_texture_height(env, tex);
 	if (env->ray.wall == 0)
 		wallx = env->ray.rposy - env->ray.dist * env->ray.rdiry;
 	else
