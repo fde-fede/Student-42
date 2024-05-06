@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 09:29:54 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/05/06 09:30:46 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/05/06 10:48:17 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,5 @@ bool PmergeMe<Container>::is_number(const std::string& s)
     return true;
 }
 
-// Explicit instantiation: https://stackoverflow.com/a/495021/10372819
 template class PmergeMe< std::vector<int> >;
 template class PmergeMe< std::deque<int> >;

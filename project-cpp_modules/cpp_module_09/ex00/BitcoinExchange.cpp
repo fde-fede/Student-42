@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 09:24:06 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/05/06 10:36:20 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:38:59 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ BitcoinExchange::BitcoinExchange()
     std::getline(file, line); // skip first line
     while (std::getline(file, line))
     {
-        size_t delim = line.find(',');
+        size_t delim = line.find('|');
 
         string date = trim(line.substr(0, delim));
         string value = trim(line.substr(delim + 1, line.length()));
@@ -281,7 +281,7 @@ bool BitcoinExchange::validDate(const string &date)
     ssMonth >> monthInt;
     ssDay >> dayInt;
 
-    if ((yearInt < 2009 || yearInt > 2022) ||
+    if ((yearInt < 2009 || yearInt > 2024) ||
         (monthInt < 1 || monthInt > 12) ||
         (dayInt < 1 || dayInt > 31))
         return false;

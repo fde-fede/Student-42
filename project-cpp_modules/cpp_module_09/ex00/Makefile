@@ -6,35 +6,54 @@
 #    By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/30 10:59:28 by fde-fede          #+#    #+#              #
-#    Updated: 2024/05/06 10:36:26 by fde-fede         ###   ########.fr        #
+#    Updated: 2024/05/06 14:56:44 by fde-fede         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = btc
+NAME		= btc
 
-CC = c++ -std=c++98
-CFLAGS = -I./include -Wall -Wextra -Werror
-ifeq ($(shell uname), Linux)
-	CC = c++ -g
+CC			= c++
+FLAGS		= -Wall -Wextra -Werror -std=c++98 -g
+RM			= rm -rf
+
+OBJDIR = build
+
+FILES		= main BitcoinExchange
+
+SRC			= $(FILES:=.cpp)
+OBJ			= $(addprefix $(OBJDIR)/, $(FILES:=.o))
+HEADER		= BitcoinExchange.hpp
+
+#Colors:
+GREEN		=	\e[92;5;118m
+YELLOW		=	\e[93;5;226m
+GRAY		=	\e[33;2;37m
+RESET		=	\e[0m
+CURSIVE		=	\e[33;3m
+
+#Debug
+ifeq ($(DEBUG), 1)
+   OPTS = -g
 endif
 
-SRC =  $(shell find . -name "*.cpp")
-OBJ = $(SRC:.cpp=.o)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ) $(HEADER)
+	@$(CC) $(OBJ) $(OPTS) -o $(NAME)
+	@printf "$(_SUCCESS) $(GREEN)- Executable ready.\n$(RESET)"
+
+$(OBJDIR)/%.o: %.cpp $(HEADER)
+	@mkdir -p $(dir $@)
+	@$(CC) $(FLAGS) $(OPTS) -c $< -o $@
 
 clean:
-	@find . -name "*.o" -delete
-	@echo "Cleaning"
+	@$(RM) $(OBJDIR) $(OBJ)
+	@printf "$(YELLOW)    - Object files removed.$(RESET)\n"
 
 fclean: clean
-	@rm $(NAME)
-	@echo "Done"
+	@$(RM) $(NAME)
+	@printf "$(YELLOW)    - Executable removed.$(RESET)\n"
 
 re: fclean all
