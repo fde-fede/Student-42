@@ -1,0 +1,30 @@
+[2024-09-19  20:57:25]      Initializing  Servers...
+[2024-09-19  20:57:25]      Server Created: ServerName[localhost] Host[127.0.0.1] Port[8002]
+[2024-09-19  20:57:34]      New Connection From 16.2.236.167, Assigned Socket 4
+[2024-09-19  20:57:34]      Request Recived From Socket 4, Method=<GET>  URI=</index.html>
+[2024-09-19  20:57:34]      Response Sent To Socket 4, Stats=<200>
+[2024-09-19  20:57:34]      Request Recived From Socket 4, Method=<GET>  URI=</assets/css/style.css>
+[2024-09-19  20:57:34]      Response Sent To Socket 4, Stats=<200>
+[2024-09-19  20:57:34]      Request Recived From Socket 4, Method=<GET>  URI=</assets/images/Desert_UAE.jpeg>
+[2024-09-19  20:57:35]      Response Sent To Socket 4, Stats=<200>
+[2024-09-19  20:57:35]      Request Recived From Socket 4, Method=<GET>  URI=</favicon.ico>
+[2024-09-19  20:57:35]      Response Sent To Socket 4, Stats=<302>
+[2024-09-19  20:57:35]      Request Recived From Socket 4, Method=<GET>  URI=</error_pages/404.html>
+[2024-09-19  20:57:35]      Response Sent To Socket 4, Stats=<200>
+[2024-09-19  20:57:49]      Request Recived From Socket 4, Method=<GET>  URI=</contact.html>
+[2024-09-19  20:57:49]      Response Sent To Socket 4, Stats=<200>
+[2024-09-19  20:57:49]      New Connection From 16.2.236.175, Assigned Socket 5
+[2024-09-19  20:57:49]      Request Recived From Socket 4, Method=<GET>  URI=</assets/css/style.css>
+[2024-09-19  20:57:49]      New Connection From 16.2.236.177, Assigned Socket 6
+[2024-09-19  20:57:49]      Response Sent To Socket 4, Stats=<200>
+[2024-09-19  20:57:49]      Request Recived From Socket 5, Method=<GET>  URI=</assets/css/password.css>
+[2024-09-19  20:57:49]      Response Sent To Socket 5, Stats=<200>
+[2024-09-19  20:57:49]      Request Recived From Socket 6, Method=<GET>  URI=</assets/js/password.js>
+[2024-09-19  20:57:49]      Response Sent To Socket 6, Stats=<200>
+[2024-09-19  20:57:49]      Request Recived From Socket 6, Method=<GET>  URI=</favicon.ico>
+[2024-09-19  20:57:49]      Response Sent To Socket 6, Stats=<302>
+[2024-09-19  20:57:49]      Request Recived From Socket 6, Method=<GET>  URI=</error_pages/404.html>
+[2024-09-19  20:57:49]      Response Sent To Socket 6, Stats=<200>
+[2024-09-19  20:58:50]      Client 4 Timeout, Closing Connection..
+[2024-09-19  20:58:51]      Client 5 Timeout, Closing Connection..
+[2024-09-19  20:58:52]      Client 6 Timeout, Closing Connection..

@@ -6,7 +6,7 @@
 /*   By: fde-fede <fde-fede@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 11:11:48 by fde-fede          #+#    #+#             */
-/*   Updated: 2024/05/06 10:36:49 by fde-fede         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:36:33 by fde-fede         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ std::string RPN::ft_all_of(const std::string& str, int (*isDigit)(int)) {
 
     for (; i < str.length(); i++) {
         if (!isDigit(str[i]))
+            valid = false;
+        if (str.length() > 1 && isDigit(str[i]))
             valid = false;
     }
 
